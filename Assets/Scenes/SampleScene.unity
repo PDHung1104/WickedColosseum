@@ -177,7 +177,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 0.79
+  orthographic size: 0.7307052
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -224,9 +224,10 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -1.6662215, y: -0.6185277}
-  - {x: -1.6673014, y: 0.78833}
-  - {x: 1.667853, y: 0.79018354}
+  - {x: -1.6731461, y: -0.61506546}
+  - {x: -1.6731461, y: -0.61506546}
+  - {x: -1.6673014, y: 0.73074883}
+  - {x: 1.667853, y: 0.7335943}
   - {x: 1.6713752, y: -0.6209629}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
@@ -336,8 +337,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1328077478}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.001, y: -0.705, z: 0}
-  m_LocalScale: {x: 3.3345454, y: 0.16529852, z: 1}
+  m_LocalPosition: {x: -0.0001, y: -0.6905, z: 0}
+  m_LocalScale: {x: 3.3417053, y: 0.19410726, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
