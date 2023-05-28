@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 24777c909da9d6547863f6cc913de64a
+guid: 674f08f7a393b7e41a79568c09324766
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,106 +105,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Attack 1_0
+      name: Run+Attack_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 86
+        width: 76.666664
         height: 86
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e6075225853cfa8468f56fef43a27d33
-      internalID: 1664760068
+      spriteID: 7f61428c5df93944fab7ed6e29d1ea15
+      internalID: 1320371143
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack 1_1
+      name: Run+Attack_1
       rect:
         serializedVersion: 2
-        x: 86
+        x: 76
         y: 0
-        width: 86
+        width: 72
         height: 86
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ee2693e27b534bb4ab8bfe5871a51098
-      internalID: -167205700
+      spriteID: a8e6554961c28194ea946af9c8173d28
+      internalID: -845982674
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack 1_2
+      name: Run+Attack_2
       rect:
         serializedVersion: 2
-        x: 172
+        x: 148
         y: 0
-        width: 86
+        width: 69
         height: 86
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d7557f0e24e6ba14f9fd799e742ae3a7
-      internalID: 1623724679
+      spriteID: 0661644a1aec3654f8a9366b4bb3c14c
+      internalID: -807816210
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack 1_3
+      name: Run+Attack_3
       rect:
         serializedVersion: 2
-        x: 258
+        x: 217
         y: 0
-        width: 86
+        width: 79
         height: 86
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a50dddc074853ae4d93dd0805c4f9352
-      internalID: 1122321049
+      spriteID: 03db91e110fc0244e863c69a4144d77e
+      internalID: -960296317
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack 1_4
+      name: Run+Attack_4
       rect:
         serializedVersion: 2
-        x: 344
+        x: 296
         y: 0
-        width: 86
+        width: 72
         height: 86
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c7c8411f0865f7d4588f5753df4162e8
-      internalID: 376326776
+      spriteID: daefca6fd3c5c2f4f8420390afea2269
+      internalID: -781303787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Run+Attack_5
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 0
+        width: 90
+        height: 86
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80927482386c06f4fb7c7a8e17a7e94c
+      internalID: -107030303
       vertices: []
       indices: 
       edges: []
@@ -220,11 +241,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Attack 1_0: 1664760068
-      Attack 1_1: -167205700
-      Attack 1_2: 1623724679
-      Attack 1_3: 1122321049
-      Attack 1_4: 376326776
+      Run+Attack_0: 1320371143
+      Run+Attack_1: -845982674
+      Run+Attack_2: -807816210
+      Run+Attack_3: -960296317
+      Run+Attack_4: -781303787
+      Run+Attack_5: -107030303
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
