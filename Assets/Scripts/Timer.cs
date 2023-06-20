@@ -14,6 +14,10 @@ public class Timer : MonoBehaviour
 
     public void Run()
     {
+        if (start == true)
+        {
+            return;
+        }
         if (maxSeconds > 0)
         {
             running = true;
@@ -29,6 +33,18 @@ public class Timer : MonoBehaviour
     public bool Finished
     {
         get { return start && !running; }
+    }
+
+    public void Restart()
+    {
+        elapsedSeconds = 0;
+        running = true;
+    }
+
+    public void Finish()
+    {
+        start = true;
+        running = false;
     }
 
     // Update is called once per frame
