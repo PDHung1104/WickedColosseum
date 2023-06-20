@@ -33,6 +33,7 @@ public class Control : MonoBehaviour
 
     MoveCharacter move;
 
+    Timer coolDownTimer;
     #endregion
 
     #region Methods
@@ -42,24 +43,46 @@ public class Control : MonoBehaviour
         anim = gameObject.GetComponent<Animator>();
         move = gameObject.GetComponent<MoveCharacter>();
         health = gameObject.GetComponent<Health>();
+        coolDownTimer = gameObject.AddComponent<Timer>();
+        coolDownTimer.Duration = 0.5f;
+        coolDownTimer.Finish();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!health.Dead)
+        if (coolDownTimer.Finished)
         {
-            if (Input.GetKeyDown("g") && move.Moving)
+            Debug.Log("Cooldown has finished");
+        }
+        if (gameObject.tag == "Player1")
+        {
+            if (!health.Dead)
             {
-                DoAttack1();
+                if (Input.GetKeyDown("g") && coolDownTimer.Finished)
+                {
+                    DoAttack1();
+                    coolDownTimer.Restart();
+                }
+                else if (Input.GetKeyDown("h"))
+                {
+                    DoAttack2();
+                }
+                //saved later for ranged attack
             }
-            else if (Input.GetKeyDown("h"))
+        } else if (gameObject.tag == "Player2") {
+            if(!health.Dead)
             {
-                DoAttack2();
-            }
-            else if (Input.GetKey("j"))
-            {
-                Defend();
+                if (Input.GetKeyDown("j") && coolDownTimer.Finished)
+                {
+                    DoAttack1();
+                    coolDownTimer.Restart();
+                }
+                else if (Input.GetKeyDown("k"))
+                {
+                    DoAttack2();
+                }
+                //saved later for ranged attack
             }
         }
     }
@@ -72,12 +95,6 @@ public class Control : MonoBehaviour
         {
             hit.GetComponent<Health>().TakeDamage(2*damage);
         }
-    }
-
-    void Defend()
-    {
-        defend = true;
-        anim.SetTrigger("Def");
     }
 
     

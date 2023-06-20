@@ -7,11 +7,10 @@ public class Health : MonoBehaviour
     // Start is called before the first frame update
     #region Fields
 
-    int maxHealth = 100;
-
     Animator anim;
 
-    int health;
+    [SerializeField]
+    int health = 100;
 
     bool dead;
 
@@ -25,7 +24,6 @@ public class Health : MonoBehaviour
 
     void Start()
     {
-        health = maxHealth;
         anim = gameObject.GetComponent<Animator>();
         dead = false;
         control = gameObject.GetComponent<Control>();
