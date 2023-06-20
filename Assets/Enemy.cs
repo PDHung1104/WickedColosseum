@@ -9,8 +9,6 @@ public class Enemy : MonoBehaviour
     //enemy's animator controller
     Animator anim;
 
-    Timer deathDelay;
-
     //health stats of enemy
     int maxHealth = 100;
     int health;
@@ -19,8 +17,6 @@ public class Enemy : MonoBehaviour
     {
         health = maxHealth;
         anim = gameObject.GetComponent<Animator>();
-        deathDelay = gameObject.AddComponent<Timer>();
-        deathDelay.Duration = 1f;
     }
 
     // Update is called once per frame
@@ -40,12 +36,6 @@ public class Enemy : MonoBehaviour
     {
         //play die animation
         anim.SetBool("Die", true);
-        deathDelay.Run();
-        if (!(anim.GetCurrentAnimatorStateInfo(0).length >
-            anim.GetCurrentAnimatorStateInfo(0).normalizedTime))
-        {
-            Destroy(gameObject);
-        }
     }
 
 }
