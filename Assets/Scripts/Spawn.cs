@@ -37,6 +37,7 @@ public class Spawn : MonoBehaviour
     float duration = 5f;
 
     GameObject[] players;
+    
     #endregion
     /// <summary>
     /// Summon the characters and initialize some fields for pvp mode
@@ -53,19 +54,20 @@ public class Spawn : MonoBehaviour
         Instantiate(prefabs[select], SpawnPosP1, Quaternion.identity);
         select = Random.Range(0, 2);
         Instantiate(prefabs[select], SpawnPosP2, Quaternion.identity); 
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         players = GameObject.FindGameObjectsWithTag("Player");
         myCamera = GetComponent<Camera>();
         players[0].tag = "Player1";
         players[0].layer = 7;
         players[1].tag = "Player2";
         players[1].layer = 8;
+
         winSceneTimer = gameObject.AddComponent<Timer>();
         winSceneTimer.Duration = duration;
+
         //initialize the EnemyLayer for each player
         players[0].GetComponent<Control>().EnemyLayer = LayerMask.GetMask(LayerMask.LayerToName(players[1].layer));
         players[1].GetComponent<Control>().EnemyLayer = LayerMask.GetMask(LayerMask.LayerToName(players[0].layer));
-
-    }
 
     void Update()
     {
