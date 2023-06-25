@@ -16,6 +16,8 @@ public class Health : MonoBehaviour
 
     int dmgTakeDef = 1;
 
+    bool hurt;
+
     Control control;
 
     #endregion
@@ -27,6 +29,7 @@ public class Health : MonoBehaviour
         anim = gameObject.GetComponent<Animator>();
         dead = false;
         control = gameObject.GetComponent<Control>();
+        hurt = false;
     }
 
     void Update()
@@ -42,6 +45,7 @@ public class Health : MonoBehaviour
     {
         if (!dead)
         {
+            hurt = true;
             health -= dmgTakeDef * dmg;
             anim.SetTrigger("Dmg");
             if (health < 0)
@@ -49,7 +53,9 @@ public class Health : MonoBehaviour
                 health = 0;
                 dead = true;
                 Die();
+                return;
             }
+            hurt = false;
         }
     }
 
@@ -65,6 +71,11 @@ public class Health : MonoBehaviour
     public bool Dead
     {
         get { return dead; }
+    }
+
+    public bool Hurt
+    {
+        get { return hurt; }
     }
 
     #endregion

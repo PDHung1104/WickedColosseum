@@ -10,10 +10,16 @@ public class Control : MonoBehaviour
     Animator anim;
 
     [SerializeField]
-    Transform attackPointMid;
+    Transform attackPointMidRight;
 
     [SerializeField]
-    Transform attackPointHead;
+    Transform attackPointMidLeft;
+
+    [SerializeField]
+    Transform attackPointHeadRight;
+
+    [SerializeField]
+    Transform attackPointHeadLeft;
 
     [SerializeField]
     float attackRangeMid = 0.5f;
@@ -34,6 +40,10 @@ public class Control : MonoBehaviour
     MoveCharacter move;
 
     Timer coolDownTimer;
+
+    SpriteRenderer sr;
+
+    const float attackCoolDownDuration = 0.5f;
     #endregion
 
     #region Methods
@@ -44,6 +54,7 @@ public class Control : MonoBehaviour
         move = gameObject.GetComponent<MoveCharacter>();
         health = gameObject.GetComponent<Health>();
         coolDownTimer = gameObject.AddComponent<Timer>();
+        sr = gameObject.GetComponent<SpriteRenderer>();
         coolDownTimer.Duration = 0.5f;
         coolDownTimer.Finish();
     }
@@ -62,7 +73,7 @@ public class Control : MonoBehaviour
                 if (Input.GetKeyDown("g") && coolDownTimer.Finished)
                 {
                     DoAttack1();
-                    coolDownTimer.Restart();
+                    coolDownTimer.Restart(attackCoolDownDuration);
                 }
                 else if (Input.GetKeyDown("h"))
                 {
@@ -76,7 +87,7 @@ public class Control : MonoBehaviour
                 if (Input.GetKeyDown("j") && coolDownTimer.Finished)
                 {
                     DoAttack1();
-                    coolDownTimer.Restart();
+                    coolDownTimer.Restart(attackCoolDownDuration);
                 }
                 else if (Input.GetKeyDown("k"))
                 {
@@ -90,7 +101,14 @@ public class Control : MonoBehaviour
     void DoAttack1()
     {
         anim.SetTrigger("Attack1");
-        Collider2D hit = Physics2D.OverlapCircle(attackPointHead.position, attackRangeHead, enemyLayer);
+        Collider2D hit;
+        if (sr.flipX)
+        {
+            hit = Physics2D.OverlapCircle(attackPointHeadLeft.position, attackRangeHead, enemyLayer);
+        } else
+        {
+            hit = Physics2D.OverlapCircle(attackPointHeadRight.position, attackRangeHead, enemyLayer);
+        }
         if (hit != null)
         {
             hit.GetComponent<Health>().TakeDamage(2*damage);
@@ -102,7 +120,15 @@ public class Control : MonoBehaviour
     void DoAttack2()
     {
         anim.SetTrigger("Attack2");
-        Collider2D hit = Physics2D.OverlapCircle(attackPointMid.position, attackRangeMid, enemyLayer);
+        Collider2D hit;
+        if (sr.flipX)
+        {
+            hit = Physics2D.OverlapCircle(attackPointMidLeft.position, attackRangeMid, enemyLayer);
+        }
+        else
+        {
+            hit = Physics2D.OverlapCircle(attackPointMidRight.position, attackRangeMid, enemyLayer);
+        }
         if (hit != null)
         {
             hit.GetComponent<Health>().TakeDamage(damage);
@@ -111,10 +137,13 @@ public class Control : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        if (attackPointHead == null || attackPointMid == null) return;
+        if (attackPointHeadRight == null || attackPointMidRight == null || attackPointHeadLeft == null || attackPointMidLeft == null) return;
 
-        Gizmos.DrawWireSphere(attackPointMid.position, attackRangeMid);
-        Gizmos.DrawWireSphere(attackPointHead.position, attackRangeHead);
+        Gizmos.DrawWireSphere(attackPointMidLeft.position, attackRangeMid);
+        Gizmos.DrawWireSphere(attackPointHeadLeft.position, attackRangeHead);
+
+        Gizmos.DrawWireSphere(attackPointMidRight.position, attackRangeMid);
+        Gizmos.DrawWireSphere(attackPointHeadRight.position, attackRangeHead);
     }
 
     #endregion
