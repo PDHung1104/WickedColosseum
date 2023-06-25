@@ -35,9 +35,10 @@ public class Timer : MonoBehaviour
         get { return start && !running; }
     }
 
-    public void Restart()
+    public void Restart(float maxSeconds)
     {
         elapsedSeconds = 0;
+        this.maxSeconds = maxSeconds;
         running = true;
     }
 

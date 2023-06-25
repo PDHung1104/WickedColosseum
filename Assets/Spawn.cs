@@ -8,7 +8,7 @@ public class Spawn : MonoBehaviour
     #region Fields
 
     [SerializeField]
-    GameObject prefab1, prefab2; //the prefabs for player1 and player2
+    GameObject[] prefabs = new GameObject[2]; //the prefabs for player1 and player2
 
     Vector3 SpawnPosP1, SpawnPosP2;
 
@@ -22,11 +22,14 @@ public class Spawn : MonoBehaviour
 
     void Start()
     {
+
         //for testing only
         SpawnPosP1 = new Vector3((float)-1.32299995, (float) -0.050999999, (float)0.539534032);
         SpawnPosP2 = new Vector3((float)1.46500003, (float)-0.0799999982, (float)0.539534032);
-        Instantiate(prefab1, SpawnPosP1, Quaternion.identity);
-        Instantiate(prefab2, SpawnPosP2, Quaternion.identity); 
+        int select = Random.Range(0, 2);
+        Instantiate(prefabs[select], SpawnPosP1, Quaternion.identity);
+        select = Random.Range(0, 2);
+        Instantiate(prefabs[select], SpawnPosP2, Quaternion.identity); 
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
         players[0].tag = "Player1";

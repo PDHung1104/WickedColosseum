@@ -49,9 +49,6 @@ public class MoveCharacter : MonoBehaviour
         
     }
 
-    //get the moving status of the game object
-    
-
     //get the moving direction of the game object
     float GetMoveDir()
     {
@@ -62,10 +59,12 @@ public class MoveCharacter : MonoBehaviour
                 if (Input.GetKey("a"))
                 {
                     //for P1
+                    sr.flipX = true;
                     return -1;
                 }
                 else if (Input.GetKey("d"))
                 {
+                    sr.flipX = false;
                     return 1;
                 }
             }
@@ -74,10 +73,12 @@ public class MoveCharacter : MonoBehaviour
                 if (Input.GetKey("left"))
                 {
                     //for P1
+                    sr.flipX = true;
                     return -1;
                 }
                 else if (Input.GetKey("right"))
                 {
+                    sr.flipX = false;
                     return 1;
                 }
             }
