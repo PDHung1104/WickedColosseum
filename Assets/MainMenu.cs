@@ -13,6 +13,6 @@ public class MainMenu : MonoBehaviour
 
     // Start the game by going into the fighting scene
     public void StartGame() {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("PvP");
     }
 }
