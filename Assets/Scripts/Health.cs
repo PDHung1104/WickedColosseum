@@ -48,7 +48,7 @@ public class Health : MonoBehaviour
         }
         else if (gameObject.layer == 8 || gameObject.layer == 6)
         {
-            pos.anchoredPosition = new Vector2(853, -56);
+            pos.anchoredPosition = new Vector2(1760, -56);
         }
     }
 
