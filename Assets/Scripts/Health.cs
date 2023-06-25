@@ -10,6 +10,7 @@ public class Health : MonoBehaviour
     Animator anim;
 
     [SerializeField]
+
     HealthBar healthBar;
 
     [SerializeField]
@@ -24,8 +25,10 @@ public class Health : MonoBehaviour
 
     Control control;
 
+
     [SerializeField]
     RectTransform pos;
+
 
     #endregion
 
@@ -37,6 +40,7 @@ public class Health : MonoBehaviour
         dead = false;
         control = gameObject.GetComponent<Control>();
         hurt = false;
+
         healthBar.SetMaxHealth(health);
         if (gameObject.layer == 7)
         {
@@ -49,6 +53,7 @@ public class Health : MonoBehaviour
     }
 
     public void TakeDamage(float dmg)
+
     {
         if (!dead)
         {
@@ -57,6 +62,7 @@ public class Health : MonoBehaviour
             healthBar.SetHealth(health);
             anim.SetTrigger("Dmg");
             if (health <= 0)
+
             {
                 health = 0;
                 dead = true;
