@@ -14,6 +14,10 @@ public class Spawn : MonoBehaviour
 
     LayerMask enemyLayer;
 
+    Camera myCamera;
+
+    [SerializeField]
+    float zoom = 0.5f;
     #endregion
     /// <summary>
     /// Summon the characters and initialize some fields for pvp mode
@@ -31,7 +35,7 @@ public class Spawn : MonoBehaviour
         select = Random.Range(0, 2);
         Instantiate(prefabs[select], SpawnPosP2, Quaternion.identity); 
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-
+        myCamera = GetComponent<Camera>();
         players[0].tag = "Player1";
         players[0].layer = 7;
         players[1].tag = "Player2";
@@ -40,6 +44,16 @@ public class Spawn : MonoBehaviour
         //initialize the EnemyLayer for each player
         players[0].GetComponent<Control>().EnemyLayer = LayerMask.GetMask(LayerMask.LayerToName(players[1].layer));
         players[1].GetComponent<Control>().EnemyLayer = LayerMask.GetMask(LayerMask.LayerToName(players[0].layer));
+
+        if (players[0].GetComponent<Health>().Dead)
+        {
+            gameObject.transform.position = new Vector3(players[1].transform.position.x, players[1].transform.position.y, players[1].transform.position.z);
+            myCamera.orthographicSize = zoom;
+        } else if (players[1].GetComponent<Health>().Dead)
+        {
+            gameObject.transform.position = new Vector3(players[0].transform.position.x, players[0].transform.position.y, players[0].transform.position.z);
+            myCamera.orthographicSize = zoom;
+        }
     }
 
     #endregion
