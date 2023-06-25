@@ -9,17 +9,23 @@ public class Health : MonoBehaviour
 
     Animator anim;
 
+    [SerializeField]
+    HealthBar healthBar;
 
     [SerializeField]
-    int health = 100;
+    float health = 100f;
 
     bool dead;
 
-    int dmgTakeDef = 1;
+    [SerializeField]
+    float armour = 1f;
 
     bool hurt;
 
     Control control;
+
+    [SerializeField]
+    RectTransform pos;
 
     #endregion
 
@@ -31,25 +37,26 @@ public class Health : MonoBehaviour
         dead = false;
         control = gameObject.GetComponent<Control>();
         hurt = false;
-    }
-
-    void Update()
-    {
-        if (control != null && control.IsDefend)
+        healthBar.SetMaxHealth(health);
+        if (gameObject.layer == 7)
         {
-            dmgTakeDef = 0;
+            pos.anchoredPosition = new Vector2(156, -56);
         }
-        dmgTakeDef = 1;
+        else if (gameObject.layer == 8 || gameObject.layer == 6)
+        {
+            pos.anchoredPosition = new Vector2(667, -56);
+        }
     }
 
-    public void TakeDamage(int dmg)
+    public void TakeDamage(float dmg)
     {
         if (!dead)
         {
             hurt = true;
-            health -= dmgTakeDef * dmg;
+            health -= armour * dmg;
+            healthBar.SetHealth(health);
             anim.SetTrigger("Dmg");
-            if (health < 0)
+            if (health <= 0)
             {
                 health = 0;
                 dead = true;

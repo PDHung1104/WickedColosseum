@@ -31,7 +31,7 @@ public class Control : MonoBehaviour
     LayerMask enemyLayer;
 
     [SerializeField]
-    int damage = 20;
+    float damage = 20f;
 
     bool defend = false;
 
