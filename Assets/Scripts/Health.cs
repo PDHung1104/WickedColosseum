@@ -9,6 +9,7 @@ public class Health : MonoBehaviour
 
     Animator anim;
 
+    HealthBar healthBar;
 
     [SerializeField]
     int health = 100;
@@ -31,6 +32,7 @@ public class Health : MonoBehaviour
         dead = false;
         control = gameObject.GetComponent<Control>();
         hurt = false;
+        healthBar.SetMaxHealth(health);
     }
 
     void Update()
@@ -48,6 +50,7 @@ public class Health : MonoBehaviour
         {
             hurt = true;
             health -= dmgTakeDef * dmg;
+            healthBar.SetHealth(health);
             anim.SetTrigger("Dmg");
             if (health < 0)
             {
