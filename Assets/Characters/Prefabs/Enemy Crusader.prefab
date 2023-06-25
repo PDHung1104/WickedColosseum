@@ -96,7 +96,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6788165527387456541}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.711, y: 0.014, z: 0.5328967}
+  m_LocalPosition: {x: 0.711, y: 0.014, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -143,8 +143,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 35861683
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 1851649380, guid: dab3e80516037d44db60d08d384fc218, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -349,10 +349,7 @@ MonoBehaviour:
   Attack: 
   attackPointMidLeft: {fileID: 527336706}
   attackPointMidRight: {fileID: 1746236734}
-  attackPointHeadRight: {fileID: 0}
-  attackPointHeadLeft: {fileID: 0}
   attackRangeMid: 0.42
-  attackRangeHead: 0.46
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
