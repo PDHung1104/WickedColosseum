@@ -40,11 +40,11 @@ public class Health : MonoBehaviour
         healthBar.SetMaxHealth(health);
         if (gameObject.layer == 7)
         {
-            pos.anchoredPosition = new Vector2(156, -56);
+            pos.anchoredPosition = new Vector2(180, -56);
         }
         else if (gameObject.layer == 8 || gameObject.layer == 6)
         {
-            pos.anchoredPosition = new Vector2(667, -56);
+            pos.anchoredPosition = new Vector2(853, -56);
         }
     }
 
