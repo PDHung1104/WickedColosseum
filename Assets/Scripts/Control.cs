@@ -4,22 +4,19 @@ using UnityEngine;
 
 public class Control : MonoBehaviour
 {
+
     // Start is called before the first frame update
     #region Fields
+    [SerializeField]
+    GameObject GFX;
 
     Animator anim;
 
     [SerializeField]
-    Transform attackPointMidRight;
+    Transform attackPointMid;
 
     [SerializeField]
-    Transform attackPointMidLeft;
-
-    [SerializeField]
-    Transform attackPointHeadRight;
-
-    [SerializeField]
-    Transform attackPointHeadLeft;
+    Transform attackPointHead;
 
     [SerializeField]
     float attackRangeMid = 0.5f;
@@ -50,11 +47,11 @@ public class Control : MonoBehaviour
 
     void Start()
     {
-        anim = gameObject.GetComponent<Animator>();
+        anim = GFX.GetComponent<Animator>();
         move = gameObject.GetComponent<MoveCharacter>();
         health = gameObject.GetComponent<Health>();
         coolDownTimer = gameObject.AddComponent<Timer>();
-        sr = gameObject.GetComponent<SpriteRenderer>();
+        sr = GFX.GetComponent<SpriteRenderer>();
         coolDownTimer.Duration = 0.5f;
         coolDownTimer.Finish();
     }
@@ -102,13 +99,7 @@ public class Control : MonoBehaviour
     {
         anim.SetTrigger("Attack1");
         Collider2D hit;
-        if (sr.flipX)
-        {
-            hit = Physics2D.OverlapCircle(attackPointHeadLeft.position, attackRangeHead, enemyLayer);
-        } else
-        {
-            hit = Physics2D.OverlapCircle(attackPointHeadRight.position, attackRangeHead, enemyLayer);
-        }
+        hit = Physics2D.OverlapCircle(attackPointHead.position, attackRangeHead, enemyLayer);
         if (hit != null)
         {
             hit.GetComponent<Health>().TakeDamage(2*damage);
@@ -121,14 +112,7 @@ public class Control : MonoBehaviour
     {
         anim.SetTrigger("Attack2");
         Collider2D hit;
-        if (sr.flipX)
-        {
-            hit = Physics2D.OverlapCircle(attackPointMidLeft.position, attackRangeMid, enemyLayer);
-        }
-        else
-        {
-            hit = Physics2D.OverlapCircle(attackPointMidRight.position, attackRangeMid, enemyLayer);
-        }
+        hit = Physics2D.OverlapCircle(attackPointMid.position, attackRangeMid, enemyLayer);
         if (hit != null)
         {
             hit.GetComponent<Health>().TakeDamage(damage);
@@ -137,17 +121,14 @@ public class Control : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        if (attackPointHeadRight == null || attackPointMidRight == null || attackPointHeadLeft == null || attackPointMidLeft == null) return;
+        if (attackPointHead == null || attackPointMid == null) return;
 
-        Gizmos.DrawWireSphere(attackPointMidLeft.position, attackRangeMid);
-        Gizmos.DrawWireSphere(attackPointHeadLeft.position, attackRangeHead);
-
-        Gizmos.DrawWireSphere(attackPointMidRight.position, attackRangeMid);
-        Gizmos.DrawWireSphere(attackPointHeadRight.position, attackRangeHead);
+        Gizmos.DrawWireSphere(attackPointMid.position, attackRangeMid);
+        Gizmos.DrawWireSphere(attackPointHead.position, attackRangeHead);
     }
 
     #endregion
-
+   
     #region Properties
 
     public bool IsDefend

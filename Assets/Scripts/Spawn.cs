@@ -34,7 +34,7 @@ public class Spawn : MonoBehaviour
     Timer winSceneTimer;
 
     [SerializeField]
-    float duration = 5f;
+    float duration = 3.5f;
 
     GameObject[] players;
 

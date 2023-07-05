@@ -7,6 +7,9 @@ public class Health : MonoBehaviour
     // Start is called before the first frame update
     #region Fields
 
+    [SerializeField]
+    GameObject GFX;
+
     Animator anim;
 
     [SerializeField]
@@ -29,6 +32,11 @@ public class Health : MonoBehaviour
     [SerializeField]
     RectTransform pos;
 
+    [SerializeField]
+    Vector2 posP1 = new Vector2(450, -56), posP2 = new Vector2(1500, -56);
+
+    [SerializeField]
+    float deadDuration = 2f;
 
     #endregion
 
@@ -36,19 +44,19 @@ public class Health : MonoBehaviour
 
     void Start()
     {
-        anim = gameObject.GetComponent<Animator>();
+        anim = GFX.GetComponent<Animator>();
         dead = false;
-        control = gameObject.GetComponent<Control>();
+        control = GFX.GetComponent<Control>();
         hurt = false;
 
         healthBar.SetMaxHealth(health);
         if (gameObject.layer == 7)
         {
-            pos.anchoredPosition = new Vector2(180, -56);
+            pos.anchoredPosition = posP1;
         }
         else if (gameObject.layer == 8 || gameObject.layer == 6)
         {
-            pos.anchoredPosition = new Vector2(1760, -56);
+            pos.anchoredPosition = posP2;
         }
     }
 
@@ -67,6 +75,7 @@ public class Health : MonoBehaviour
                 health = 0;
                 dead = true;
                 Die();
+                Destroy(gameObject, deadDuration);
                 return;
             }
             hurt = false;

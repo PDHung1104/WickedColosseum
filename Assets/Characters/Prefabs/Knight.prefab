@@ -29,7 +29,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6599522754121244604}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1646798577
 GameObject:
@@ -60,9 +60,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6599522754121244604}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3469339038026571828
+--- !u!1 &6239805938709559608
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -70,79 +70,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4992071496787269162}
+  - component: {fileID: 2799142965824419391}
+  - component: {fileID: 4987838801513138588}
+  - component: {fileID: 1743498952869145698}
   m_Layer: 0
-  m_Name: AttackPointMidLeft
+  m_Name: GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4992071496787269162
+--- !u!4 &2799142965824419391
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3469339038026571828}
+  m_GameObject: {fileID: 6239805938709559608}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.2, y: -0.24, z: 0.09001821}
+  m_LocalPosition: {x: 0.019, y: 0.013, z: -0.00553234}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6599522754121244604}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6599522754121244601
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6599522754121244604}
-  - component: {fileID: 6599522754121244607}
-  - component: {fileID: 6599522754121244606}
-  - component: {fileID: 8069766072290989257}
-  - component: {fileID: 3232405320033168979}
-  - component: {fileID: 194258908}
-  - component: {fileID: 194258907}
-  - component: {fileID: 1972327589}
-  m_Layer: 8
-  m_Name: Knight
-  m_TagString: Player
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6599522754121244604
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6599522754121244601}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.331, y: -0.051, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 184927903}
-  - {fileID: 1646798578}
-  - {fileID: 8351365623903635740}
-  - {fileID: 4992071496787269162}
-  - {fileID: 6295081448207109183}
-  m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &6599522754121244607
+--- !u!212 &4987838801513138588
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6599522754121244601}
+  m_GameObject: {fileID: 6239805938709559608}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -182,20 +141,20 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.725, y: 0.86}
+  m_Size: {x: 0.46, y: 0.86}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &6599522754121244606
+--- !u!95 &1743498952869145698
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6599522754121244601}
+  m_GameObject: {fileID: 6239805938709559608}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 435012b16ccc7c142b90c739d4e02402, type: 2}
@@ -209,6 +168,46 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &6599522754121244601
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6599522754121244604}
+  - component: {fileID: 8069766072290989257}
+  - component: {fileID: 3232405320033168979}
+  - component: {fileID: 194258908}
+  - component: {fileID: 194258907}
+  - component: {fileID: 1972327589}
+  m_Layer: 7
+  m_Name: Knight
+  m_TagString: Player1
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6599522754121244604
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6599522754121244601}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.331, y: -0.051, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2799142965824419391}
+  - {fileID: 184927903}
+  - {fileID: 1646798578}
+  - {fileID: 6295081448207109183}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8069766072290989257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,6 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e9a23b54bacff742a23cb7725fb5a2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GFX: {fileID: 6239805938709559608}
 --- !u!114 &3232405320033168979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,15 +233,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dae7f4608b153e4d8e1f1a62b39ee41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPointMidRight: {fileID: 184927903}
-  attackPointMidLeft: {fileID: 4992071496787269162}
-  attackPointHeadRight: {fileID: 1646798578}
-  attackPointHeadLeft: {fileID: 8351365623903635740}
+  GFX: {fileID: 6239805938709559608}
+  attackPointMid: {fileID: 184927903}
+  attackPointHead: {fileID: 1646798578}
   attackRangeMid: 0.35
   attackRangeHead: 0.37
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 320
   damage: 10
 --- !u!50 &194258908
 Rigidbody2D:
@@ -258,7 +257,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_Interpolate: 1
   m_SleepingMode: 0
@@ -302,41 +301,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 581a4165e16811140a91fbb07811c01c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GFX: {fileID: 6239805938709559608}
   healthBar: {fileID: 6295081447685465490}
   health: 1000
   armour: 1
   pos: {fileID: 6295081447685465488}
---- !u!1 &8425198152045176004
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8351365623903635740}
-  m_Layer: 0
-  m_Name: AttackPointHeadLeft
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8351365623903635740
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8425198152045176004}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.19, y: 0.18, z: 0.09001821}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6599522754121244604}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  posP1: {x: 450, y: -56}
+  posP2: {x: 1500, y: -56}
+  deadDuration: 3.5
 --- !u!1001 &5322821309758314563
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -366,7 +338,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2198577948704855164, guid: 006793a2f153e57468bbdda8eddc9a74, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2198577948704855164, guid: 006793a2f153e57468bbdda8eddc9a74, type: 3}
       propertyPath: m_AnchorMax.x
