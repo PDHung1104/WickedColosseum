@@ -6,8 +6,11 @@ public class EnemyAttack : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField]
+    GameObject GFX;
+
+    [SerializeField]
     List<int> Attack;
-    
+
     Collider2D hit;
     
     Animator anim;
@@ -15,7 +18,7 @@ public class EnemyAttack : MonoBehaviour
     SpriteRenderer sr;
 
     [SerializeField]
-    Transform attackPointMidLeft, attackPointMidRight;
+    Transform attackPointMid;
 
     [SerializeField]
     float attackRangeMid = 0.5f;
@@ -36,8 +39,8 @@ public class EnemyAttack : MonoBehaviour
 
     void Start()
     {
-        anim = GetComponent<Animator>();
-        sr = GetComponent<SpriteRenderer>();
+        anim = GFX.GetComponent<Animator>();
+        sr = GFX.GetComponent<SpriteRenderer>();
         timer = gameObject.AddComponent<Timer>();
         timer.Duration = Random.Range(1, 3);
         coolDownTimer = gameObject.AddComponent<Timer>();
@@ -62,14 +65,7 @@ public class EnemyAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (sr.flipX)
-        {
-            hit = Physics2D.OverlapCircle(attackPointMidLeft.position, attackRangeMid, enemyLayer);
-        }
-        else
-        {
-            hit = Physics2D.OverlapCircle(attackPointMidRight.position, attackRangeMid, enemyLayer);
-        }
+        hit = Physics2D.OverlapCircle(attackPointMid.position, attackRangeMid, enemyLayer);
         if (hit != null)
         {
             if (timer.Finished)
@@ -81,12 +77,9 @@ public class EnemyAttack : MonoBehaviour
     }
     private void OnDrawGizmosSelected()
     {
-        if (attackPointMidRight == null || attackPointMidLeft == null) return;
+        if (attackPointMid == null) return;
 
-        Gizmos.DrawWireSphere(attackPointMidLeft.position, attackRangeMid);
-        //Gizmos.DrawWireSphere(attackPointHeadLeft.position, attackRangeHead);
-
-        Gizmos.DrawWireSphere(attackPointMidRight.position, attackRangeMid);
-        //Gizmos.DrawWireSphere(attackPointHeadRight.position, attackRangeHead);
+        Gizmos.DrawWireSphere(attackPointMid.position, attackRangeMid);
+      
     }
 }

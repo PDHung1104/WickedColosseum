@@ -9,6 +9,8 @@ public class MoveCharacter : MonoBehaviour
 {
 
     #region Fields
+    [SerializeField]
+    GameObject GFX;
 
     const int PLAYER1 = 7;
     float speed = 90f;
@@ -32,13 +34,11 @@ public class MoveCharacter : MonoBehaviour
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
-        anim = gameObject.GetComponent<Animator>();
-        sr = gameObject.GetComponent<SpriteRenderer>();
+        anim = GFX.GetComponent<Animator>();
+        sr = GFX.GetComponent<SpriteRenderer>();
         moving = false;
         health = gameObject.GetComponent<Health>();
     }
-
-
     void FixedUpdate()
     {  
         //move the character around
@@ -59,12 +59,12 @@ public class MoveCharacter : MonoBehaviour
                 if (Input.GetKey("a"))
                 {
                     //for P1
-                    sr.flipX = true;
+                    transform.localScale = new Vector3(-1, 1, 1);
                     return -1;
                 }
                 else if (Input.GetKey("d"))
                 {
-                    sr.flipX = false;
+                    transform.localScale = new Vector3(1, 1, 1);
                     return 1;
                 }
             }
@@ -73,12 +73,12 @@ public class MoveCharacter : MonoBehaviour
                 if (Input.GetKey("left"))
                 {
                     //for P1
-                    sr.flipX = true;
+                    transform.localScale = new Vector3(-1, 1, 1);
                     return -1;
                 }
                 else if (Input.GetKey("right"))
                 {
-                    sr.flipX = false;
+                    transform.localScale = new Vector3(1, 1, 1);
                     return 1;
                 }
             }
@@ -90,10 +90,6 @@ public class MoveCharacter : MonoBehaviour
     {
         //update player's input every frame
         move = new Vector2(GetMoveDir(), gameObject.transform.position.y);
-        if (gameObject.layer != PLAYER1)
-        {
-            sr.flipX = true;
-        }
         if (move.x != 0)
         {
             moving = true;
