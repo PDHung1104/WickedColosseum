@@ -6,36 +6,36 @@ public class EnemyAttack : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField]
-    GameObject GFX;
+    protected GameObject GFX;
 
     [SerializeField]
-    List<int> Attack;
+    protected List<int> Attack;
 
-    Collider2D hit;
+    protected Collider2D hit;
+
+    protected Animator anim;
+
+    protected SpriteRenderer sr;
+
+    [SerializeField]
+    protected Transform attackPointMid;
+
+    [SerializeField]
+    protected float attackRangeMid = 0.5f;
+
+    [SerializeField]
+    protected LayerMask enemyLayer;
+
+    [SerializeField]
+    protected float damage = 20f;
+
+    protected Timer timer;
+
+    protected Health health;
+
+    protected Timer coolDownTimer;
     
-    Animator anim;
-    
-    SpriteRenderer sr;
-
-    [SerializeField]
-    Transform attackPointMid;
-
-    [SerializeField]
-    float attackRangeMid = 0.5f;
-
-    [SerializeField]
-    LayerMask enemyLayer;
-
-    [SerializeField]
-    float damage = 20f;
-
-    Timer timer;
-
-    Health health;
-
-    Timer coolDownTimer;
-    
-    const float attackCoolDownDuration = 0.5f;
+    protected const float attackCoolDownDuration = 0.5f;
 
     void Start()
     {
@@ -52,7 +52,7 @@ public class EnemyAttack : MonoBehaviour
         coolDownTimer.Finish();
     }
 
-    void DoAttack()
+    protected virtual void DoAttack()
     {
         if (coolDownTimer.Finished && !health.Hurt)
         {
@@ -75,7 +75,7 @@ public class EnemyAttack : MonoBehaviour
             }
         }
     }
-    private void OnDrawGizmosSelected()
+    protected void OnDrawGizmosSelected()
     {
         if (attackPointMid == null) return;
 

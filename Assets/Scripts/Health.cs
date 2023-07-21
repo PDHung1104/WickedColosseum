@@ -38,6 +38,8 @@ public class Health : MonoBehaviour
     [SerializeField]
     float deadDuration = 2f;
 
+    bool defending;
+
     #endregion
 
     #region Methods
@@ -54,16 +56,17 @@ public class Health : MonoBehaviour
         {
             pos.anchoredPosition = posP1;
         }
-        else if (gameObject.layer == 8 || gameObject.layer == 6)
+        else if (gameObject.layer == 8)
         {
             pos.anchoredPosition = posP2;
         }
+        defending = false;
     }
 
     public void TakeDamage(float dmg)
 
     {
-        if (!dead)
+        if (!defending && !dead)
         {
             hurt = true;
             health -= armour * dmg;
@@ -78,13 +81,18 @@ public class Health : MonoBehaviour
                 Destroy(gameObject, deadDuration);
                 return;
             }
-            hurt = false;
+            StartCoroutine(Hurting(0.2f));
         }
     }
 
-    public void Die()
+    private IEnumerator Hurting(float duration) {
+        yield return new WaitForSeconds(duration);
+        hurt = false;
+    }
+    private void Die()
     {
         anim.SetTrigger("Dead");
+        Destroy(gameObject, 2f);
     }
 
     #endregion
@@ -99,6 +107,12 @@ public class Health : MonoBehaviour
     public bool Hurt
     {
         get { return hurt; }
+    }
+
+    public bool Defend
+    {
+        set { defending = value; }
+        get { return defending; }
     }
 
     #endregion

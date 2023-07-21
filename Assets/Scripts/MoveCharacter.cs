@@ -7,13 +7,13 @@ using UnityEngine;
 
 public class MoveCharacter : MonoBehaviour
 {
-
     #region Fields
     [SerializeField]
     GameObject GFX;
 
     const int PLAYER1 = 7;
-    float speed = 90f;
+    [SerializeField]
+    float jump, speed = 90f;
 
     Rigidbody2D rb;
 
@@ -25,36 +25,81 @@ public class MoveCharacter : MonoBehaviour
 
     Health health;
 
-    bool moving;
+    bool moving, canJump;
 
+    [SerializeField]
+    float radius = 1f;
+
+    float jumpForce;
+
+    [SerializeField]
+    Transform groundCheck;
+
+    [SerializeField]
+    LayerMask ground;
+
+    [SerializeField]
+    float fallMultiplier = 1f;
+    
+    Vector2 vecGravity;
+
+    bool isGround;
     #endregion
 
     #region Methods
 
     void Start()
     {
+        vecGravity = new Vector2(0, -Physics2D.gravity.y);
         rb = gameObject.GetComponent<Rigidbody2D>();
         anim = GFX.GetComponent<Animator>();
         sr = GFX.GetComponent<SpriteRenderer>();
         moving = false;
         health = gameObject.GetComponent<Health>();
+        jumpForce = transform.position.y;
+        isGround = true;
     }
     void FixedUpdate()
-    {  
+    {
         //move the character around
-       
-        rb.velocity = new Vector2(move.x * speed * Time.deltaTime, move.y);
+        GroundCheck();
         //mirror-flip the character if moving to the left of the screen
         //only for player 1 (the one on the left)
-        
+        if (!health.Dead)
+        {
+            jumpForce = jump;
+            if (gameObject.tag == "Player1" || gameObject.tag == "Player")
+            {
+                if (Input.GetKey("w") && isGround)
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                    anim.SetBool("Jump", true);
+                    
+                }
+            }
+            else
+            {
+                if (Input.GetKey("up") && isGround)
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                    anim.SetBool("Jump", true);
+                }
+            }
+            rb.velocity = new Vector2(move.x * speed * Time.deltaTime, rb.velocity.y);
+            if (rb.velocity.y < 0)
+            {
+                rb.velocity -= vecGravity * fallMultiplier;
+            }
+            //rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+        }
     }
 
     //get the moving direction of the game object
     float GetMoveDir()
     {
-        if (!health.Dead)
+        if (!health.Defend && !health.Dead)
         {
-            if (gameObject.tag == "Player1")
+            if (gameObject.tag == "Player1" || gameObject.tag == "Player")
             {
                 if (Input.GetKey("a"))
                 {
@@ -66,10 +111,10 @@ public class MoveCharacter : MonoBehaviour
                 {
                     transform.localScale = new Vector3(1, 1, 1);
                     return 1;
-                }
+                } 
             }
             else
-            {
+            { 
                 if (Input.GetKey("left"))
                 {
                     //for P1
@@ -88,6 +133,7 @@ public class MoveCharacter : MonoBehaviour
 
     void Update()
     {
+        anim.SetFloat("yVelocity", rb.velocity.y);
         //update player's input every frame
         move = new Vector2(GetMoveDir(), gameObject.transform.position.y);
         if (move.x != 0)
@@ -100,6 +146,21 @@ public class MoveCharacter : MonoBehaviour
             moving = false;
             anim.SetInteger("Speed", 0);
         }
+    }
+
+    void GroundCheck()
+    {
+        isGround = false;
+        if (Physics2D.OverlapCircle(groundCheck.position, radius, ground) != null)
+        {
+            isGround = true;
+        }
+        anim.SetBool("Jump", !isGround);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(groundCheck.position, radius);
     }
 
     #endregion
