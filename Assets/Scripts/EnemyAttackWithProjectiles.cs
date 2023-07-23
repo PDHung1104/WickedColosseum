@@ -36,9 +36,9 @@ public class EnemyAttackWithProjectiles : EnemyAttack
             shootTimer += Time.deltaTime;
             hit = Physics2D.OverlapCircle(attackPointMid.position, attackRangeMid, enemyLayer);
             float distance = 10f;
-            if (GameObject.FindGameObjectWithTag("Player1") != null)
+            if (GameObject.FindGameObjectWithTag("Player") != null)
             {
-                distance = Vector2.Distance(transform.position, GameObject.FindGameObjectWithTag("Player1").transform.position);
+                distance = Vector2.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position);
             }
             if (hit != null)
             {

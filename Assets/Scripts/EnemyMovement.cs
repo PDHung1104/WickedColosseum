@@ -37,7 +37,6 @@ public class EnemyMovement : MonoBehaviour
 
     AIPath pathfinder;
     Seeker seeker;
-    AIDestinationSetter destinationSetter;
 
     Animator anim;
     Health health;
@@ -49,7 +48,6 @@ public class EnemyMovement : MonoBehaviour
     void Start()
     {
         seeker = GetComponent<Seeker>();
-        destinationSetter = GetComponent<AIDestinationSetter>();
         patrolMovement = GetComponent<EnemyWandering>();
         anim = GFX.GetComponent<Animator>();
         pathfinder = GetComponent<AIPath>();
@@ -64,13 +62,14 @@ public class EnemyMovement : MonoBehaviour
         approachEnemy = Physics2D.OverlapCircle(approach.position, approachRange, enemyLayer);
         if (!health.Dead)
         {
-            if (approachEnemy == null && isGround)
+            if (approachEnemy == null)
             {
                 patrolMovement.Patrol = true;
             }
-            else if (GameObject.FindWithTag("Player1") != null){
+            else
+            {
                 patrolMovement.Patrol = false;
-                pathfinder.destination = new Vector3(GameObject.FindWithTag("Player1").transform.position.x, transform.position.y, GameObject.FindWithTag("Player1").transform.position.z);
+                pathfinder.destination = new Vector3(GameObject.FindWithTag("Player").transform.position.x, transform.position.y, GameObject.FindWithTag("Player").transform.position.z);
                 if (pathfinder.velocity.x > 0.1f)
                 {
                     transform.localScale = new Vector3(1, 1, 1);
@@ -87,12 +86,12 @@ public class EnemyMovement : MonoBehaviour
                 {
                     anim.SetInteger("Speed", 0);
                 }
-                if (pathfinder.velocity.y < 0f)
-                {
-                    anim.SetFloat("yVelocity", pathfinder.velocity.y);
-                }
             }
-                
+            if (pathfinder.velocity.y < 0f)
+            {
+                anim.SetFloat("yVelocity", pathfinder.velocity.y);
+            }
+
         } else
         {
             pathfinder.canMove = false;

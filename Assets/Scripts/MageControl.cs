@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class MageControl : Control
@@ -15,18 +16,17 @@ public class MageControl : Control
 
     int FireBallSpam;
 
-    bool canShoot;
-
     // Start is called before the first frame update
     void Start()
     {
+        pushForce = 1000f;
         anim = GFX.GetComponent<Animator>();
         move = gameObject.GetComponent<MoveCharacter>();
         health = gameObject.GetComponent<Health>();
         sr = GFX.GetComponent<SpriteRenderer>();
         FireBallSpam = maxFireBalls;
         canAttack = true;
-        canShoot = true;
+        canStun = true;
     }
 
     // Update is called once per frame
@@ -42,10 +42,11 @@ public class MageControl : Control
                     canAttack = false;
                     StartCoroutine(CoolDown());
                 }
-                else if (Input.GetKeyDown("h"))
+                else if (Input.GetKeyDown("h") && canStun)
                 {
                     DoAttack2();
-                    
+                    canStun = false;
+                    StartCoroutine(CoolDownStun());
                 }
                 else if (Input.GetKeyDown("j") && FireBallSpam > 0)
                 {
@@ -67,15 +68,13 @@ public class MageControl : Control
                 else if (Input.GetKeyDown("l"))
                 {
                     DoAttack2();
+                    canStun = false;
+                    StartCoroutine(CoolDownStun());
                 }
-                else if (canShoot && Input.GetKeyDown(";") && FireBallSpam > 0)
+                else if (Input.GetKeyDown(";") && FireBallSpam > 0)
                 {
                     SpecialSkill();
                     FireBallSpam--;
-                }
-                if (FireBallSpam == 0)
-                {
-                    canShoot = false;
                 }
             }
         }
@@ -93,14 +92,15 @@ public class MageControl : Control
         hit = Physics2D.OverlapCircle(attackPointMid.position, attackRangeMid, enemyLayer);
         if (hit != null)
         {
-            hit.GetComponent<Health>().TakeDamage(damage);
+            hit.GetComponent<Health>().Stun();
             //recharge fire balls if dealing damage with melee attack
             FireBallSpam = maxFireBalls;
         }
     }
     void ThrowFireBall()
     {
-        Instantiate(FireBall, fireBallSpawn.position, Quaternion.identity);
+        GameObject fireball = Instantiate(FireBall, fireBallSpawn.position, Quaternion.identity);
+        fireball.GetComponent<FireBallScript>().LocalScale = gameObject.transform.localScale;
     }
 
     void OnDrawGizmos()
