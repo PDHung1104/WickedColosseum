@@ -26,6 +26,8 @@ public class Control : MonoBehaviour
     [SerializeField]
     protected LayerMask enemyLayer;
 
+    protected float pushForce;
+
     [SerializeField]
     protected float damage = 20f;
 
@@ -39,18 +41,20 @@ public class Control : MonoBehaviour
 
     protected const float attackCoolDownDuration = 0.5f;
 
-    protected bool canAttack;
+    protected bool canAttack, canStun;
     #endregion
 
     #region Methods
 
     void Start()
     {
+        pushForce = 10f;
         anim = GFX.GetComponent<Animator>();
         move = gameObject.GetComponent<MoveCharacter>();
         health = gameObject.GetComponent<Health>();
         sr = GFX.GetComponent<SpriteRenderer>();
         canAttack = true;
+        canStun = true;
     }
 
     // Update is called once per frame
@@ -69,10 +73,13 @@ public class Control : MonoBehaviour
                 else if (Input.GetKeyDown("h"))
                 {
                     DoAttack2();
+                    canStun = false;
+                    StartCoroutine(CoolDownStun());
                 }
                 if (Input.GetKey("j"))
                 {
                     SpecialSkill();
+                    
                 } else
                 {
                     health.Defend = false;
@@ -91,6 +98,8 @@ public class Control : MonoBehaviour
                 else if (Input.GetKeyDown("l"))
                 {
                     DoAttack2();
+                    canStun = false;
+                    StartCoroutine(CoolDownStun());
                 }
                 if (Input.GetKey(";"))
                 {
@@ -110,6 +119,13 @@ public class Control : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         canAttack = true;
     }
+
+    protected IEnumerator CoolDownStun()
+    {
+        yield return new WaitForSeconds(1.5f);
+        canStun = true;
+    }
+
     protected void DoAttack1()
     {
         anim.SetTrigger("Attack1");
@@ -130,7 +146,7 @@ public class Control : MonoBehaviour
         hit = Physics2D.OverlapCircle(attackPointMid.position, attackRangeMid, enemyLayer);
         if (hit != null)
         {
-            hit.GetComponent<Health>().TakeDamage(damage);
+            hit.GetComponent<Health>().Stun();
         }
     }
 

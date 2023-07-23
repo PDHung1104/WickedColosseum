@@ -15,8 +15,6 @@ public class EnemyWandering : MonoBehaviour
     // Start is called before the first frame update
     #region Fields
 
-    Rigidbody2D rb;
-
     Animator anim;
 
     [SerializeField]
@@ -31,8 +29,6 @@ public class EnemyWandering : MonoBehaviour
     Transform temp;
 
     AIPath pathfinder;
-    Seeker seeker;
-    AIDestinationSetter destinationSetter;
 
     Health health;
 
@@ -44,15 +40,12 @@ public class EnemyWandering : MonoBehaviour
     void Start()
     {
         health = GetComponent<Health>();
-        seeker = GetComponent<Seeker>();
-        destinationSetter = GetComponent<AIDestinationSetter>();
         pathfinder = GetComponent<AIPath>();
         isPatrolling = true;
         anim = GFX.GetComponent<Animator>();
-        rb = GetComponent<Rigidbody2D>();
         pathfinder.maxSpeed = 0.7f;
         pathfinder.destination = new Vector3(transform.position.x + wanderRange, transform.position.y, transform.position.z);
-        //anim.SetInteger("Speed", 1);
+        anim.SetInteger("Speed", 1);
     }
 
     // Update is called once per frame
@@ -62,7 +55,7 @@ public class EnemyWandering : MonoBehaviour
         {
             pathfinder.maxSpeed = 0.9f;
            
-            if (Vector3.Distance(transform.position, pathfinder.destination) < 0.6f)
+            if (Vector3.Distance(transform.position, pathfinder.destination) < 0.4f)
             {
                 pathfinder.destination = new Vector3(transform.position.x + wanderRange, transform.position.y, transform.position.z);
                 wanderRange *= -1;
@@ -90,7 +83,7 @@ public class EnemyWandering : MonoBehaviour
 
     public bool OnSameSidePlayer()
     {
-        if ((GameObject.FindGameObjectWithTag("Player1").transform.position.x < transform.position.x && transform.localScale.x == -1) || (GameObject.FindGameObjectWithTag("Player1").transform.position.x > transform.position.x && transform.localScale.x == 1)) {
+        if ((GameObject.FindGameObjectWithTag("Player").transform.position.x < transform.position.x && transform.localScale.x == -1) || (GameObject.FindGameObjectWithTag("Player").transform.position.x > transform.position.x && transform.localScale.x == 1)) {
             return true;
         }
         return false;

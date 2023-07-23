@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1746236734}
-  m_Layer: 6
+  m_Layer: 13
   m_Name: CrusaderAttackPointMid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3555781306990310707}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4741313766379835429}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Approach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 834751981811729726}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.346, z: -0.015988223}
+  m_LocalPosition: {x: 0, y: 0.16, z: -0.015988223}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 6546635817933234798}
   - component: {fileID: 1183447455505840993}
   - component: {fileID: 976804027991754523}
-  m_Layer: 6
+  m_Layer: 13
   m_Name: GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -164,8 +164,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1677759465
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 1851649380, guid: dab3e80516037d44db60d08d384fc218, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -208,7 +208,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8588263622440064489}
-  m_Layer: 6
+  m_Layer: 13
   m_Name: groundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -241,14 +241,13 @@ GameObject:
   - component: {fileID: 6788165527387456542}
   - component: {fileID: 8282843076925479974}
   - component: {fileID: 6923853904328356120}
-  - component: {fileID: 1920496901}
   - component: {fileID: 1920496902}
   - component: {fileID: 1920496903}
   - component: {fileID: 1920496913}
   - component: {fileID: 1920496918}
   - component: {fileID: 1232421367}
   - component: {fileID: 3680451621288427643}
-  m_Layer: 6
+  m_Layer: 13
   m_Name: Enemy Crusader
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -314,29 +313,15 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 3.5
+  m_GravityScale: 10
   m_Material: {fileID: 0}
   m_Interpolate: 1
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &1920496901
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6788165527387456541}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9679e68a0f1144e79c664d9a11ca121, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 1
-  target: {fileID: 0}
 --- !u!114 &1920496902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -353,7 +338,7 @@ MonoBehaviour:
   radius: 0.49
   height: 2
   canMove: 1
-  maxSpeed: 1.85
+  maxSpeed: 2.3
   gravity: {x: NaN, y: NaN, z: NaN}
   groundMask:
     serializedVersion: 2
@@ -443,11 +428,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GFX: {fileID: 1572549277250870843}
   healthBar: {fileID: 1209184394116028799}
-  health: 1000
-  armour: 2.12
+  maxHealth: 100
+  armour: 1.5
+  score: 100
   pos: {fileID: 1209184394116028797}
-  posP1: {x: 450, y: -56}
-  posP2: {x: 1500, y: -56}
   deadDuration: 2.5
 --- !u!114 &1232421367
 MonoBehaviour:
@@ -467,8 +451,8 @@ MonoBehaviour:
   attackRangeMid: 0.42
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 128
-  damage: 21.45
+    m_Bits: 384
+  damage: 40
 --- !u!114 &3680451621288427643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -481,7 +465,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7630348c17b709a49bf342520663b7b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 169560057776474420}
   GFX: {fileID: 1572549277250870843}
   playZone:
     serializedVersion: 2
@@ -494,6 +477,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6788165527387456542}
     m_Modifications:
+    - target: {fileID: 2198577947977572459, guid: 006793a2f153e57468bbdda8eddc9a74, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 2198577948149661139, guid: 006793a2f153e57468bbdda8eddc9a74, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 3
@@ -501,6 +488,10 @@ PrefabInstance:
     - target: {fileID: 2198577948149661139, guid: 006793a2f153e57468bbdda8eddc9a74, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 69
+      objectReference: {fileID: 0}
+    - target: {fileID: 2198577948149661148, guid: 006793a2f153e57468bbdda8eddc9a74, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 2198577948402936265, guid: 006793a2f153e57468bbdda8eddc9a74, type: 3}
       propertyPath: m_AnchorMax.x
@@ -510,9 +501,17 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2198577948402936266, guid: 006793a2f153e57468bbdda8eddc9a74, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 2198577948704855160, guid: 006793a2f153e57468bbdda8eddc9a74, type: 3}
       propertyPath: m_Name
       value: HealthBarUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 2198577948704855160, guid: 006793a2f153e57468bbdda8eddc9a74, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 2198577948704855164, guid: 006793a2f153e57468bbdda8eddc9a74, type: 3}
       propertyPath: m_Pivot.x
@@ -609,6 +608,14 @@ PrefabInstance:
     - target: {fileID: 2198577948704855164, guid: 006793a2f153e57468bbdda8eddc9a74, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2198577948704855165, guid: 006793a2f153e57468bbdda8eddc9a74, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1677759465
+      objectReference: {fileID: 0}
+    - target: {fileID: 2198577948704855166, guid: 006793a2f153e57468bbdda8eddc9a74, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 006793a2f153e57468bbdda8eddc9a74, type: 3}

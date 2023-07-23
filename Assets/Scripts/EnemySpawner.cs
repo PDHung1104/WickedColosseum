@@ -19,7 +19,9 @@ public class EnemySpawner : MonoBehaviour
     Transform[] spawners;
 
     [SerializeField]
-    int enemyCount = 4;
+    int waveCount = 4;
+
+    int currentWave;
 
     GameObject playerTransform;
     #endregion
@@ -29,19 +31,21 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         playerTransform = GameObject.FindWithTag("Player1");
+        currentWave = waveCount;
     }
 
     void Update()
     {
+        GameObject player = GameObject.FindWithTag("Player1");
         if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
         {
-            enemyCount--;
+            currentWave--;
             enemySpawner(enemyPrefabs);
         }
-        if (enemyCount == 0)
+        if (currentWave == 0)
         {
             bossSpawner();
-            Destroy(this);
+            currentWave = waveCount;
         }
     }
 
@@ -50,7 +54,7 @@ public class EnemySpawner : MonoBehaviour
         Random.InitState(System.Environment.TickCount);
         int toBeSpawnEnemy;
         int selectSpawner;
-        int enemyCount = Random.Range(1, spawners.Length);
+        int enemyCount = Random.Range(1, 4);
         for (int i = 0; i < enemyCount; i++) {
             toBeSpawnEnemy = Random.Range(0, enemyPrefabs.Length);
             selectSpawner = Random.Range(0, spawners.Length);

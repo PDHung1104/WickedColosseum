@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1932415568172853788}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1366941641580203579}
-  m_Layer: 6
+  m_Layer: 14
   m_Name: Approach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,13 +75,12 @@ GameObject:
   - component: {fileID: 8630130145546223655}
   - component: {fileID: 6341257055788345076}
   - component: {fileID: 1407442988633738830}
-  - component: {fileID: -2450123184132758642}
   - component: {fileID: 4988158083198091717}
   - component: {fileID: -7648489431119833562}
   - component: {fileID: -1108638401716060890}
   - component: {fileID: 6992686608507161344}
   - component: {fileID: 3141988854713159848}
-  m_Layer: 6
+  m_Layer: 14
   m_Name: BossLv1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -136,11 +135,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GFX: {fileID: 8571203858883402800}
   healthBar: {fileID: 7576294119166259213}
-  health: 1000
+  maxHealth: 200
   armour: 1.5
+  score: 200
   pos: {fileID: 7576294119166259215}
-  posP1: {x: 450, y: -56}
-  posP2: {x: 1500, y: -56}
   deadDuration: 2
 --- !u!61 &6341257055788345076
 BoxCollider2D:
@@ -183,26 +181,12 @@ Rigidbody2D:
   m_Mass: 9
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 3.5
+  m_GravityScale: 10
   m_Material: {fileID: 0}
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &-2450123184132758642
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4670076669363465158}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9679e68a0f1144e79c664d9a11ca121, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 1
-  target: {fileID: 0}
 --- !u!114 &4988158083198091717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,7 +291,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7630348c17b709a49bf342520663b7b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1027563514372081421}
   GFX: {fileID: 8571203858883402800}
   playZone:
     serializedVersion: 2
@@ -332,7 +315,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
-  damage: 50
+  damage: 100
 --- !u!1 &7612825813013898728
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,7 +325,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7473908197777959859}
-  m_Layer: 6
+  m_Layer: 14
   m_Name: groundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -375,7 +358,7 @@ GameObject:
   - component: {fileID: 4479763557252713677}
   - component: {fileID: 260634821718422242}
   - component: {fileID: 4684844447088528616}
-  m_Layer: 6
+  m_Layer: 14
   m_Name: GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -435,8 +418,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1677759465
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 257a006d5bed0b34dabd4a2619ed50cb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -479,7 +462,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5161483006852385345}
-  m_Layer: 6
+  m_Layer: 14
   m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -514,7 +497,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2198577947977572459, guid: 006793a2f153e57468bbdda8eddc9a74, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 2198577948149661139, guid: 006793a2f153e57468bbdda8eddc9a74, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -526,7 +509,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2198577948149661148, guid: 006793a2f153e57468bbdda8eddc9a74, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 2198577948402936265, guid: 006793a2f153e57468bbdda8eddc9a74, type: 3}
       propertyPath: m_AnchorMax.x
@@ -538,7 +521,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2198577948402936266, guid: 006793a2f153e57468bbdda8eddc9a74, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 2198577948704855160, guid: 006793a2f153e57468bbdda8eddc9a74, type: 3}
       propertyPath: m_Name
@@ -546,7 +529,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2198577948704855160, guid: 006793a2f153e57468bbdda8eddc9a74, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 2198577948704855164, guid: 006793a2f153e57468bbdda8eddc9a74, type: 3}
       propertyPath: m_Pivot.x
@@ -639,6 +622,14 @@ PrefabInstance:
     - target: {fileID: 2198577948704855164, guid: 006793a2f153e57468bbdda8eddc9a74, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2198577948704855165, guid: 006793a2f153e57468bbdda8eddc9a74, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1677759465
+      objectReference: {fileID: 0}
+    - target: {fileID: 2198577948704855166, guid: 006793a2f153e57468bbdda8eddc9a74, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 006793a2f153e57468bbdda8eddc9a74, type: 3}

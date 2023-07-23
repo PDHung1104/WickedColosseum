@@ -12,12 +12,16 @@ public class Health : MonoBehaviour
 
     Animator anim;
 
+    bool stun;
+
     [SerializeField]
 
     HealthBar healthBar;
 
     [SerializeField]
-    float health = 100f;
+    float maxHealth = 100f;
+
+    float health;
 
     bool dead;
 
@@ -28,12 +32,11 @@ public class Health : MonoBehaviour
 
     Control control;
 
+    [SerializeField]
+    int score;
 
     [SerializeField]
     RectTransform pos;
-
-    [SerializeField]
-    Vector2 posP1 = new Vector2(450, -56), posP2 = new Vector2(1500, -56);
 
     [SerializeField]
     float deadDuration = 2f;
@@ -46,20 +49,13 @@ public class Health : MonoBehaviour
 
     void Start()
     {
+        stun = false;
         anim = GFX.GetComponent<Animator>();
         dead = false;
         control = GFX.GetComponent<Control>();
         hurt = false;
-
-        healthBar.SetMaxHealth(health);
-        if (gameObject.layer == 7)
-        {
-            pos.anchoredPosition = posP1;
-        }
-        else if (gameObject.layer == 8)
-        {
-            pos.anchoredPosition = posP2;
-        }
+        health = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
         defending = false;
     }
 
@@ -69,7 +65,7 @@ public class Health : MonoBehaviour
         if (!defending && !dead)
         {
             hurt = true;
-            health -= armour * dmg;
+            health -= dmg/armour;
             healthBar.SetHealth(health);
             anim.SetTrigger("Dmg");
             if (health <= 0)
@@ -85,6 +81,19 @@ public class Health : MonoBehaviour
         }
     }
 
+    public void Stun()
+    {
+        anim.SetBool("Stun", true);
+        stun = true;
+        StartCoroutine(StunTimer());
+    }
+
+    IEnumerator StunTimer()
+    {
+        yield return new WaitForSeconds(2.5f);
+        stun = false;
+        anim.SetBool("Stun", false);
+    }
     private IEnumerator Hurting(float duration) {
         yield return new WaitForSeconds(duration);
         hurt = false;
@@ -92,7 +101,31 @@ public class Health : MonoBehaviour
     private void Die()
     {
         anim.SetTrigger("Dead");
+        if (gameObject.layer != 7)
+        {
+            ScoreScript.score += score;
+            if (ScoreScript.score > PlayerPrefs.GetInt("highScore", 0))
+            {
+                ScoreScript.SetHighScore();
+            }
+            GameObject.FindWithTag("Player").GetComponent<Health>().AddHealth(50);
+        } else {
+            if (ScoreScript.score > PlayerPrefs.GetInt("highScore", 0))
+            {
+                ScoreScript.SetHighScore();
+            }
+        }
         Destroy(gameObject, 2f);
+    }
+
+    private void AddHealth(float health)
+    {
+        this.health += health;
+        if (this.health > maxHealth)
+        {
+            this.health = maxHealth;
+        }
+        healthBar.SetHealth(this.health);
     }
 
     #endregion
@@ -113,6 +146,11 @@ public class Health : MonoBehaviour
     {
         set { defending = value; }
         get { return defending; }
+    }
+
+    public bool Stunned
+    {
+        get { return stun; }
     }
 
     #endregion

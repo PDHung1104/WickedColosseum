@@ -68,7 +68,7 @@ public class EnemyAttack : MonoBehaviour
         hit = Physics2D.OverlapCircle(attackPointMid.position, attackRangeMid, enemyLayer);
         if (hit != null)
         {
-            if (timer.Finished)
+            if (timer.Finished && !health.Stunned)
             {
                 DoAttack();
                 timer.Restart(Random.Range(1, 3));
