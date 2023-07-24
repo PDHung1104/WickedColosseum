@@ -16,4 +16,10 @@ public class GameMode : MonoBehaviour
     public void back() {
         SceneManager.LoadScene("MainMenu");
     }
+
+    public void charSelect()
+    {
+        SceneManager.LoadScene("CharSelect");
+    }
+
 }
