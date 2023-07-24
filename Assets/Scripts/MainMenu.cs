@@ -11,8 +11,8 @@ public class MainMenu : MonoBehaviour
         Debug.Log("See you next time!");
     }
 
-    // Start the game by going into the fighting scene
-    public void StartGame() {
-        SceneManager.LoadScene("PvP");
+    // Start the game by going into the gamemode scene
+    public void StartPlaying() {
+        SceneManager.LoadScene("GameMode");
     }
 }
