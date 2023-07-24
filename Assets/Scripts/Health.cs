@@ -119,16 +119,15 @@ public class Health : MonoBehaviour
             {
                 ScoreScript.SetHighScore();
             }
+            StartCoroutine(LoadToMain());
         }
-        StartCoroutine(LoadMain());
     }
 
-    IEnumerator LoadMain()
+    IEnumerator LoadToMain()
     {
         yield return new WaitForSeconds(2f);
         SceneManager.LoadScene("MainMenu");
     }
-
     private void AddHealth(float health)
     {
         this.health += health;
