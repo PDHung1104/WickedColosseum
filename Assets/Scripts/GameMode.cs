@@ -13,4 +13,7 @@ public class GameMode : MonoBehaviour
     public void pvp() {
         SceneManager.LoadScene("PvP");
     }
+    public void back() {
+        SceneManager.LoadScene("MainMenu");
+    }
 }
