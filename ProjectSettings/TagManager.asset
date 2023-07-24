@@ -7,6 +7,8 @@ TagManager:
   - Player1
   - Player2
   - Enemy
+  - PointA
+  - PointB
   layers:
   - Default
   - TransparentFX
@@ -18,13 +20,13 @@ TagManager:
   - Player1
   - Player2
   - Ground
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - A*
+  - Knight
+  - ScoreDisplay
+  - Crusader
+  - Boss Viking
+  - Bat
+  - Boss Golem
   - 
   - 
   - 
@@ -43,4 +45,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2665635575
+    locked: 0
+  - name: Game Objects
+    uniqueID: 2617207831
     locked: 0

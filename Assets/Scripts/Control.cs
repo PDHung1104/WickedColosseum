@@ -6,109 +6,131 @@ public class Control : MonoBehaviour
 {
     // Start is called before the first frame update
     #region Fields
+    [SerializeField]
+    protected GameObject GFX;
 
-    Animator anim;
+    protected Animator anim;
 
     [SerializeField]
-    Transform attackPointMidRight;
+    protected Transform attackPointMid;
 
     [SerializeField]
-    Transform attackPointMidLeft;
+    protected Transform attackPointHead;
 
     [SerializeField]
-    Transform attackPointHeadRight;
+    protected float attackRangeMid = 0.5f;
 
     [SerializeField]
-    Transform attackPointHeadLeft;
+    protected float attackRangeHead = 0.5f;
 
     [SerializeField]
-    float attackRangeMid = 0.5f;
+    protected LayerMask enemyLayer;
+
+    protected float pushForce;
 
     [SerializeField]
-    float attackRangeHead = 0.5f;
+    protected float damage = 20f;
 
-    [SerializeField]
-    LayerMask enemyLayer;
+    protected bool defend = false;
 
-    [SerializeField]
-    int damage = 20;
+    protected Health health;
 
-    bool defend = false;
+    protected MoveCharacter move;
 
-    Health health;
+    protected SpriteRenderer sr;
 
-    MoveCharacter move;
+    protected const float attackCoolDownDuration = 0.5f;
 
-    Timer coolDownTimer;
-
-    SpriteRenderer sr;
-
-    const float attackCoolDownDuration = 0.5f;
+    protected bool canAttack, canStun;
     #endregion
 
     #region Methods
 
     void Start()
     {
-        anim = gameObject.GetComponent<Animator>();
+        pushForce = 10f;
+        anim = GFX.GetComponent<Animator>();
         move = gameObject.GetComponent<MoveCharacter>();
         health = gameObject.GetComponent<Health>();
-        coolDownTimer = gameObject.AddComponent<Timer>();
-        sr = gameObject.GetComponent<SpriteRenderer>();
-        coolDownTimer.Duration = 0.5f;
-        coolDownTimer.Finish();
+        sr = GFX.GetComponent<SpriteRenderer>();
+        canAttack = true;
+        canStun = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (coolDownTimer.Finished)
-        {
-            Debug.Log("Cooldown has finished");
-        }
-        if (gameObject.tag == "Player1")
+        if (gameObject.tag == "Player1" || gameObject.tag == "Player")
         {
             if (!health.Dead)
             {
-                if (Input.GetKeyDown("g") && coolDownTimer.Finished)
+                if (Input.GetKeyDown("g") && canAttack)
                 {
                     DoAttack1();
-                    coolDownTimer.Restart(attackCoolDownDuration);
+                    canAttack = false;
+                    StartCoroutine(CoolDown());
                 }
                 else if (Input.GetKeyDown("h"))
                 {
                     DoAttack2();
+                    canStun = false;
+                    StartCoroutine(CoolDownStun());
+                }
+                if (Input.GetKey("j"))
+                {
+                    SpecialSkill();
+                    
+                } else
+                {
+                    health.Defend = false;
                 }
                 //saved later for ranged attack
             }
         } else if (gameObject.tag == "Player2") {
             if(!health.Dead)
             {
-                if (Input.GetKeyDown("j") && coolDownTimer.Finished)
+                if (Input.GetKeyDown("k") && canAttack)
                 {
                     DoAttack1();
-                    coolDownTimer.Restart(attackCoolDownDuration);
+                    canAttack = false;
+                    StartCoroutine(CoolDown());
                 }
-                else if (Input.GetKeyDown("k"))
+                else if (Input.GetKeyDown("l"))
                 {
                     DoAttack2();
+                    canStun = false;
+                    StartCoroutine(CoolDownStun());
+                }
+                if (Input.GetKey(";"))
+                {
+                    SpecialSkill();
+                }
+                else
+                {
+                    health.Defend = false;
                 }
                 //saved later for ranged attack
             }
         }
     }
 
-    void DoAttack1()
+    protected IEnumerator CoolDown()
+    {
+        yield return new WaitForSeconds(0.5f);
+        canAttack = true;
+    }
+
+    protected IEnumerator CoolDownStun()
+    {
+        yield return new WaitForSeconds(1.5f);
+        canStun = true;
+    }
+
+    protected void DoAttack1()
     {
         anim.SetTrigger("Attack1");
         Collider2D hit;
-        if (sr.flipX)
-        {
-            hit = Physics2D.OverlapCircle(attackPointHeadLeft.position, attackRangeHead, enemyLayer);
-        } else
-        {
-            hit = Physics2D.OverlapCircle(attackPointHeadRight.position, attackRangeHead, enemyLayer);
-        }
+        hit = Physics2D.OverlapCircle(attackPointHead.position, attackRangeHead, enemyLayer);
         if (hit != null)
         {
             hit.GetComponent<Health>().TakeDamage(2*damage);
@@ -117,37 +139,33 @@ public class Control : MonoBehaviour
 
     
 
-    void DoAttack2()
+    protected virtual void DoAttack2()
     {
         anim.SetTrigger("Attack2");
         Collider2D hit;
-        if (sr.flipX)
-        {
-            hit = Physics2D.OverlapCircle(attackPointMidLeft.position, attackRangeMid, enemyLayer);
-        }
-        else
-        {
-            hit = Physics2D.OverlapCircle(attackPointMidRight.position, attackRangeMid, enemyLayer);
-        }
+        hit = Physics2D.OverlapCircle(attackPointMid.position, attackRangeMid, enemyLayer);
         if (hit != null)
         {
-            hit.GetComponent<Health>().TakeDamage(damage);
+            hit.GetComponent<Health>().Stun();
         }
     }
 
-    private void OnDrawGizmosSelected()
+    protected virtual void SpecialSkill()
     {
-        if (attackPointHeadRight == null || attackPointMidRight == null || attackPointHeadLeft == null || attackPointMidLeft == null) return;
+        anim.SetTrigger("Special");
+        health.Defend = true;   
+    }
 
-        Gizmos.DrawWireSphere(attackPointMidLeft.position, attackRangeMid);
-        Gizmos.DrawWireSphere(attackPointHeadLeft.position, attackRangeHead);
+    void OnDrawGizmosSelected()
+    {
+        if (attackPointHead == null || attackPointMid == null) return;
 
-        Gizmos.DrawWireSphere(attackPointMidRight.position, attackRangeMid);
-        Gizmos.DrawWireSphere(attackPointHeadRight.position, attackRangeHead);
+        Gizmos.DrawWireSphere(attackPointMid.position, attackRangeMid);
+        Gizmos.DrawWireSphere(attackPointHead.position, attackRangeHead);
     }
 
     #endregion
-
+   
     #region Properties
 
     public bool IsDefend
