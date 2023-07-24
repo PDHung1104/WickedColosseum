@@ -16,7 +16,13 @@ public class EnemySpawner : MonoBehaviour
     GameObject[] Bosses;
 
     [SerializeField]
+    GameObject[] characters;
+
+    [SerializeField]
     Transform[] spawners;
+
+    [SerializeField]
+    Transform playerSpawn;
 
     [SerializeField]
     int waveCount = 4;
@@ -30,13 +36,12 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void Start()
     {
-        playerTransform = GameObject.FindWithTag("Player1");
         currentWave = waveCount;
+        Instantiate(characters[PlayerPrefs.GetInt("SelectCharacter", 0)], playerSpawn.position, Quaternion.identity);
     }
 
     void Update()
     {
-        GameObject player = GameObject.FindWithTag("Player1");
         if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
         {
             currentWave--;
@@ -77,6 +82,7 @@ public class EnemySpawner : MonoBehaviour
         {
             Gizmos.DrawWireSphere(spawner.position, 0.2f);
         }
+        Gizmos.DrawWireSphere(playerSpawn.position, 0.2f);
     }
 
     #endregion
