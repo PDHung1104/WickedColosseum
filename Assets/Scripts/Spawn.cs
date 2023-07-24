@@ -31,8 +31,6 @@ public class Spawn : MonoBehaviour
     [SerializeField]
     Vector3 offset = new Vector3(0f, -4f, 2f);
 
-    Timer winSceneTimer;
-
     [SerializeField]
     float duration = 3.5f;
 
@@ -63,9 +61,6 @@ public class Spawn : MonoBehaviour
         players[1].tag = "Player2";
         players[1].layer = 8;
 
-        winSceneTimer = gameObject.AddComponent<Timer>();
-        winSceneTimer.Duration = duration;
-
         //initialize the EnemyLayer for each player
         players[0].GetComponent<Control>().EnemyLayer = LayerMask.GetMask(LayerMask.LayerToName(players[1].layer));
         players[1].GetComponent<Control>().EnemyLayer = LayerMask.GetMask(LayerMask.LayerToName(players[0].layer));
@@ -73,28 +68,26 @@ public class Spawn : MonoBehaviour
 
     void Update()
     {
-        if (players[0].GetComponent<Health>().Dead)
+        if (players[0] != null && players[0].GetComponent<Health>().Dead)
         {
             targetPosition = players[1].transform.position + offset;
             transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity3, smoothTime);
             myCamera.orthographicSize = Mathf.SmoothDamp(myCamera.orthographicSize, zoom, ref velocity, smoothTime);
-            winSceneTimer.Run();
-            if (winSceneTimer.Finished)
-            {
-                SceneManager.LoadScene("MainMenu");
-            }
+            StartCoroutine(winScene(duration));
         }
-        else if (players[1].GetComponent<Health>().Dead)
+        else if (players[1] != null && players[1].GetComponent<Health>().Dead)
         {
             targetPosition = players[0].transform.position + offset;
             transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity3, smoothTime);
             myCamera.orthographicSize = Mathf.SmoothDamp(myCamera.orthographicSize, zoom, ref velocity, smoothTime);
-            winSceneTimer.Run();
-            if (winSceneTimer.Finished)
-            {
-                SceneManager.LoadScene("MainMenu");
-            }
+            StartCoroutine(winScene(duration));
         }
+    }
+
+    IEnumerator winScene(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        SceneManager.LoadScene("MainMenu");
     }
 
     #endregion
