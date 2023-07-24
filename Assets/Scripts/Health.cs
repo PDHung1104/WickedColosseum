@@ -108,7 +108,10 @@ public class Health : MonoBehaviour
             {
                 ScoreScript.SetHighScore();
             }
-            GameObject.FindWithTag("Player").GetComponent<Health>().AddHealth(50);
+            if (GameObject.FindWithTag("Player") != null)
+            {
+                GameObject.FindWithTag("Player").GetComponent<Health>().AddHealth(50);
+            }
         } else {
             if (ScoreScript.score > PlayerPrefs.GetInt("highScore", 0))
             {
