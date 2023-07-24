@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
@@ -112,15 +113,21 @@ public class Health : MonoBehaviour
             {
                 GameObject.FindWithTag("Player").GetComponent<Health>().AddHealth(50);
             }
+            Destroy(gameObject, 2f);
         } else {
             if (ScoreScript.score > PlayerPrefs.GetInt("highScore", 0))
             {
                 ScoreScript.SetHighScore();
             }
+            StartCoroutine(LoadToMain());
         }
-        Destroy(gameObject, 2f);
     }
 
+    IEnumerator LoadToMain()
+    {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene("MainMenu");
+    }
     private void AddHealth(float health)
     {
         this.health += health;
